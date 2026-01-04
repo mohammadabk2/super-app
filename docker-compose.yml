@@ -1,0 +1,31 @@
+services:
+  # 1. MySQL Database Service
+  db:
+    image: mysql:8.0.28
+    container_name: mysql-db
+    environment:
+      MYSQL_DATABASE: 'super-app'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - "3306:3306"
+    restart: always
+
+  # 2. Node.js Application Service
+  node-app:
+    build: ./node             
+    container_name: super-app-node
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    restart: always
+
+  # 3. PHP Service
+  php-app:
+    build: ./php            
+    container_name: super-app-php
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    restart: always
