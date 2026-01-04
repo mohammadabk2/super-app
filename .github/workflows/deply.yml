@@ -24,6 +24,6 @@ jobs:
       - name: Build and push Node App
         uses: docker/build-push-action@v4
         with:
-          context: ./node/Dockerfile
+          context: ./node
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/super-app:latest
